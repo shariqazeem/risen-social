@@ -125,42 +125,20 @@ export default function Home() {
   /* ======== MAIN APP ======== */
   return (
     <div className="min-h-[100dvh] page-bg">
-      {/* Glass Header */}
-      <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-black/[0.04]">
-        <div className="max-w-2xl mx-auto px-5 h-[52px] flex items-center justify-between">
+      {/* === MOBILE: Glass Header === */}
+      <header className="lg:hidden sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-black/[0.04]">
+        <div className="px-5 h-[52px] flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-[9px] bg-[#1d1d1f] flex items-center justify-center">
               <span className="text-white text-[11px] font-black tracking-tight">U</span>
             </div>
             <span className="text-[15px] font-semibold tracking-[-0.02em]">Umanity</span>
           </div>
-          {/* Desktop tabs */}
-          <nav className="hidden md:flex items-center gap-1">
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`relative px-3.5 py-1.5 text-[13px] font-medium rounded-lg transition-all duration-200 ${
-                  activeTab === tab.id
-                    ? 'text-[#1d1d1f] bg-black/[0.05]'
-                    : 'text-[#86868b] hover:text-[#1d1d1f] hover:bg-black/[0.03]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
           <div className="flex items-center gap-3">
             {guestMode && (
-              <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-[10px] text-amber-600 font-medium">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-[10px] text-amber-600 font-medium">
                 Guest
               </span>
-            )}
-            {!guestMode && (
-              <div className="hidden md:flex items-center gap-1 text-[10px] text-[#86868b]">
-                <div className="pulse-dot" />
-                <span>Devnet</span>
-              </div>
             )}
             {publicKey && isRegistered && registeredUsername && (
               <NotificationBell
@@ -173,22 +151,23 @@ export default function Home() {
         </div>
       </header>
 
-      <LiveTicker />
+      {/* === MOBILE: LiveTicker === */}
+      <div className="lg:hidden">
+        <LiveTicker />
+      </div>
 
-      {/* Guest banner */}
+      {/* === MOBILE: Guest Banner === */}
       {guestMode && (
-        <div className="bg-gradient-to-r from-amber-50/80 to-orange-50/80 backdrop-blur-sm border-b border-amber-200/30">
-          <div className="max-w-2xl mx-auto px-5 py-2 flex items-center justify-between">
-            <p className="text-[11px] text-amber-700/80">
-              Browsing as guest — connect wallet to donate & post
-            </p>
+        <div className="lg:hidden bg-gradient-to-r from-amber-50/80 to-orange-50/80 border-b border-amber-200/30">
+          <div className="px-5 py-2 flex items-center justify-between">
+            <p className="text-[11px] text-amber-700/80">Guest mode — connect wallet to donate & post</p>
             <WalletButton />
           </div>
         </div>
       )}
 
-      {/* Mobile Bottom Tab Bar — iOS style */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-t border-black/[0.04] safe-area-bottom">
+      {/* === MOBILE: Bottom Tab Bar === */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-t border-black/[0.04] safe-area-bottom">
         <div className="flex items-center justify-around h-[52px] max-w-md mx-auto">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id
@@ -212,8 +191,130 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="max-w-2xl mx-auto px-5 pt-4 pb-24 md:pb-8">
+      {/* ============ DESKTOP: X-style 3-column layout ============ */}
+      <div className="hidden lg:flex max-w-[1280px] mx-auto min-h-[100dvh]">
+
+        {/* LEFT SIDEBAR — Fixed nav like X */}
+        <aside className="w-[260px] flex-shrink-0 sticky top-0 h-[100dvh] flex flex-col border-r border-black/[0.04] px-3 py-5">
+          {/* Logo */}
+          <div className="flex items-center gap-2.5 px-3 mb-6">
+            <div className="w-8 h-8 rounded-[10px] bg-[#1d1d1f] flex items-center justify-center">
+              <span className="text-white text-[12px] font-black tracking-tight">U</span>
+            </div>
+            <span className="text-[16px] font-semibold tracking-[-0.02em]">Umanity</span>
+          </div>
+
+          {/* Nav Items */}
+          <nav className="flex-1 space-y-0.5">
+            {TABS.map((tab) => {
+              const isActive = activeTab === tab.id
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-[15px] transition-all duration-200 ${
+                    isActive
+                      ? 'text-[#1d1d1f] font-bold bg-black/[0.04]'
+                      : 'text-[#525252] font-medium hover:bg-black/[0.03]'
+                  }`}
+                >
+                  <span className={`transition-transform ${isActive ? 'scale-110' : ''}`}>
+                    {tab.icon}
+                  </span>
+                  {tab.label}
+                </button>
+              )
+            })}
+          </nav>
+
+          {/* Devnet indicator */}
+          <div className="px-3 mb-3">
+            {guestMode ? (
+              <div className="flex items-center gap-1.5 text-[11px] text-amber-600 mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                Guest Mode
+              </div>
+            ) : (
+              <div className="flex items-center gap-1.5 text-[11px] text-[#86868b] mb-2">
+                <div className="pulse-dot" />
+                Solana Devnet
+              </div>
+            )}
+          </div>
+
+          {/* Wallet & User */}
+          <div className="px-2 space-y-2">
+            {publicKey && isRegistered && registeredUsername && (
+              <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl">
+                <GradientAvatar username={registeredUsername} size="md" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-[13px] font-semibold truncate">@{registeredUsername}</p>
+                </div>
+                <NotificationBell address={publicKey.toBase58()} username={registeredUsername} />
+              </div>
+            )}
+            <WalletButton />
+          </div>
+        </aside>
+
+        {/* CENTER — Main content feed */}
+        <main className="flex-1 min-w-0 border-r border-black/[0.04]">
+          {/* Desktop LiveTicker */}
+          <LiveTicker />
+
+          {/* Guest Banner Desktop */}
+          {guestMode && (
+            <div className="bg-gradient-to-r from-amber-50/80 to-orange-50/80 border-b border-amber-200/30">
+              <div className="px-5 py-2 flex items-center justify-between">
+                <p className="text-[11px] text-amber-700/80">Browsing as guest — connect wallet to donate & post</p>
+                <WalletButton />
+              </div>
+            </div>
+          )}
+
+          <div className="px-5 pt-4 pb-8">
+            <div className="entrance-reveal">
+              {activeTab === 'feed' && <SmartFeed guestMode={guestMode} />}
+              {activeTab === 'explore' && <ExplorePage />}
+              {activeTab === 'donate' && <DonateView guestMode={guestMode} />}
+              {activeTab === 'govern' && <GovernancePanel />}
+              {activeTab === 'profile' && (guestMode ? <GuestProfileView /> : <ProfilePage />)}
+            </div>
+          </div>
+        </main>
+
+        {/* RIGHT SIDEBAR — Widgets like X */}
+        <aside className="w-[320px] flex-shrink-0 sticky top-0 h-[100dvh] overflow-y-auto px-5 py-5 space-y-4">
+          {/* Stats Widget */}
+          <DesktopStatsWidget />
+
+          {/* Leaderboard Widget */}
+          <div className="card p-4">
+            <h3 className="font-bold text-[15px] mb-3">Top Donors</h3>
+            <Leaderboard />
+          </div>
+
+          {/* Activity Widget */}
+          <div className="card p-4">
+            <h3 className="font-bold text-[15px] mb-3">Recent Activity</h3>
+            <ActivityFeed />
+          </div>
+
+          {/* Built With */}
+          <div className="px-2 pt-2">
+            <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-[#aeaeb2]">
+              <span>Solana</span>
+              <span>Tapestry</span>
+              <span>Anchor</span>
+              <span>Supabase</span>
+            </div>
+            <p className="text-[10px] text-[#d4d4d4] mt-2">&copy; 2025 Umanity</p>
+          </div>
+        </aside>
+      </div>
+
+      {/* === MOBILE: Main Content === */}
+      <main className="lg:hidden px-5 pt-4 pb-24">
         <div className="entrance-reveal">
           {activeTab === 'feed' && <SmartFeed guestMode={guestMode} />}
           {activeTab === 'explore' && <ExplorePage />}
@@ -258,6 +359,45 @@ function StatsBar() {
           <p className="text-[10px] text-[#86868b] uppercase tracking-[0.12em] font-medium mt-1">{s.label}</p>
         </div>
       ))}
+    </div>
+  )
+}
+
+/* ===== DESKTOP RIGHT SIDEBAR STATS ===== */
+function DesktopStatsWidget() {
+  const [stats, setStats] = useState<{ totalDonations?: number; totalDonors?: number } | null>(null)
+  const [proposalCount, setProposalCount] = useState(0)
+
+  useEffect(() => {
+    fetch('/api/platform/stats')
+      .then(r => r.json())
+      .then(d => { if (d.stats) setStats(d.stats) })
+      .catch(() => {})
+    fetch('/api/governance/proposals')
+      .then(r => r.json())
+      .then(d => { if (d.proposals) setProposalCount(d.proposals.length) })
+      .catch(() => {})
+  }, [])
+
+  if (!stats) return null
+
+  return (
+    <div className="card p-4">
+      <h3 className="font-bold text-[15px] mb-3">Platform Stats</h3>
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <span className="text-[13px] text-[#86868b]">SOL Donated</span>
+          <span className="text-[15px] font-bold counter">{(stats.totalDonations || 0).toFixed(2)}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-[13px] text-[#86868b]">Total Donors</span>
+          <span className="text-[15px] font-bold counter">{stats.totalDonors || 0}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-[13px] text-[#86868b]">Proposals</span>
+          <span className="text-[15px] font-bold counter">{proposalCount}</span>
+        </div>
+      </div>
     </div>
   )
 }
