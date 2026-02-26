@@ -344,7 +344,7 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
   {
     patterns: ['who built', 'who made', 'team', 'creator', 'developer', 'built by'],
     priority: 9,
-    response: `Umanity was built for the Solana Graveyard Hackathon 2025 — the mission is to resurrect "dead" crypto categories by giving them real purpose. The team physically delivers donations to verified charities and posts proof on @umanity_xyz. Follow us on X for delivery updates and proof of impact!`,
+    response: `Umanity was built for the Solana Graveyard Hackathon 2026 — the mission is to resurrect "dead" crypto categories by giving them real purpose. The team physically delivers donations to verified charities and posts proof on @umanity_xyz. Follow us on X for delivery updates and proof of impact!`,
   },
   // --- Cost / Fee ---
   {

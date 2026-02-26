@@ -628,7 +628,7 @@ function LandingPage({ onGuestMode }: { onGuestMode: () => void }) {
               <span>Tapestry</span>
               <span>Anchor</span>
               <span>Supabase</span>
-              <span>&copy; 2025</span>
+              <span>&copy; 2026</span>
             </div>
           </div>
         </footer>
