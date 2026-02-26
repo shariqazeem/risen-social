@@ -129,10 +129,7 @@ export default function Home() {
       {/* === MOBILE: Glass Header === */}
       <header className="lg:hidden sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-black/[0.04]">
         <div className="px-5 h-[52px] flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Umanity" width={28} height={28} className="rounded-full" />
-            <span className="text-[15px] font-semibold tracking-[-0.02em]">Umanity</span>
-          </div>
+          <Image src="/logo.png" alt="Umanity" width={36} height={36} className="rounded-full" />
           <div className="flex items-center gap-3">
             {guestMode && (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-[10px] text-amber-600 font-medium">
@@ -195,9 +192,8 @@ export default function Home() {
         {/* LEFT SIDEBAR — Fixed nav like X */}
         <aside className="w-[260px] flex-shrink-0 sticky top-0 h-[100dvh] flex flex-col border-r border-black/[0.04] px-3 py-5">
           {/* Logo */}
-          <div className="flex items-center gap-2.5 px-3 mb-6">
-            <Image src="/logo.png" alt="Umanity" width={32} height={32} className="rounded-full" />
-            <span className="text-[16px] font-semibold tracking-[-0.02em]">Umanity</span>
+          <div className="px-3 mb-6">
+            <Image src="/logo.png" alt="Umanity" width={42} height={42} className="rounded-full" />
           </div>
 
           {/* Nav Items */}
@@ -430,10 +426,7 @@ function LandingPage({ onGuestMode }: { onGuestMode: () => void }) {
       {/* Floating Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-2xl border-b border-black/[0.04]">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <Image src="/logo.png" alt="Umanity" width={32} height={32} className="rounded-full" />
-            <span className="text-[16px] font-bold tracking-[-0.03em]">Umanity</span>
-          </div>
+          <Image src="/logo.png" alt="Umanity" width={38} height={38} className="rounded-full" />
           <div className="flex items-center gap-5">
             <button
               onClick={onGuestMode}
@@ -626,10 +619,9 @@ function LandingPage({ onGuestMode }: { onGuestMode: () => void }) {
         {/* Footer */}
         <footer className="border-t border-black/[0.04] py-8 px-6 bg-[#fafafa]">
           <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2.5">
-              <Image src="/logo.png" alt="Umanity" width={24} height={24} className="rounded-full" />
-              <span className="text-[13px] font-semibold text-[#1d1d1f]">Umanity</span>
-              <span className="text-[11px] text-[#aeaeb2] ml-2">Crypto charity, resurrected.</span>
+            <div className="flex items-center gap-3">
+              <Image src="/logo.png" alt="Umanity" width={28} height={28} className="rounded-full" />
+              <span className="text-[11px] text-[#aeaeb2]">Crypto charity, resurrected.</span>
             </div>
             <div className="flex items-center gap-5 text-[11px] text-[#aeaeb2]">
               <span>Solana</span>
@@ -798,10 +790,7 @@ function OnboardingScreen({ onComplete, referrer }: { onComplete: () => void; re
   return (
     <div className="min-h-[100dvh] page-bg flex flex-col">
       <header className="px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Image src="/logo.png" alt="Umanity" width={28} height={28} className="rounded-full" />
-          <span className="text-[15px] font-semibold tracking-[-0.02em]">Umanity</span>
-        </div>
+        <Image src="/logo.png" alt="Umanity" width={36} height={36} className="rounded-full" />
         <button
           onClick={() => disconnect()}
           className="text-[12px] text-[#aeaeb2] hover:text-[#86868b] transition-colors"
