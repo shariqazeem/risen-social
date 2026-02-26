@@ -132,28 +132,14 @@ export async function POST(
     const connection = new Connection(SOLANA_RPC, 'confirmed')
     const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash()
 
-    // Calculate rent for DonationRecord (discriminator 8 + Pubkey 32 + Pubkey 32 + u64 8 + i64 8 + u8 1 = 89 bytes)
-    const donationRecordSpace = 8 + 32 + 32 + 8 + 8 + 1
-    const rentLamports = await connection.getMinimumBalanceForRentExemption(donationRecordSpace)
-
     const transaction = new Transaction({
       blockhash,
       lastValidBlockHeight,
       feePayer: userPubkey,
     })
 
-    // Create DonationRecord account
-    transaction.add(
-      SystemProgram.createAccount({
-        fromPubkey: userPubkey,
-        newAccountPubkey: donationRecord.publicKey,
-        lamports: rentLamports,
-        space: donationRecordSpace,
-        programId,
-      })
-    )
-
-    // Add donate_to_pool instruction
+    // donate_to_pool instruction — Anchor's `init` constraint on donation_record
+    // handles account creation internally via CPI to system_program
     transaction.add({
       keys: [
         { pubkey: poolPDA, isSigner: false, isWritable: true },
