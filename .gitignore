@@ -43,5 +43,8 @@ test-ledger/
 !package.json
 !tsconfig.json
 
-# Docker
+# Supabase
+supabase/.temp/
+
+# Misc
 certbot/

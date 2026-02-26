@@ -16,6 +16,7 @@ import { GradientAvatar } from '@/components/shared/GradientAvatar'
 import { NotificationBell } from '@/components/shared/NotificationBell'
 import { UmanityAgent } from '@/components/ai/UmanityAgent'
 import { LiveTicker } from '@/components/feed/LiveTicker'
+import Image from 'next/image'
 
 const TABS = [
   { id: 'feed' as const, label: 'Feed', icon: (
@@ -128,10 +129,8 @@ export default function Home() {
       {/* === MOBILE: Glass Header === */}
       <header className="lg:hidden sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-black/[0.04]">
         <div className="px-5 h-[52px] flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-[9px] bg-[#1d1d1f] flex items-center justify-center">
-              <span className="text-white text-[11px] font-black tracking-tight">U</span>
-            </div>
+          <div className="flex items-center gap-2">
+            <Image src="/logo.png" alt="Umanity" width={28} height={28} className="rounded-full" />
             <span className="text-[15px] font-semibold tracking-[-0.02em]">Umanity</span>
           </div>
           <div className="flex items-center gap-3">
@@ -197,9 +196,7 @@ export default function Home() {
         <aside className="w-[260px] flex-shrink-0 sticky top-0 h-[100dvh] flex flex-col border-r border-black/[0.04] px-3 py-5">
           {/* Logo */}
           <div className="flex items-center gap-2.5 px-3 mb-6">
-            <div className="w-8 h-8 rounded-[10px] bg-[#1d1d1f] flex items-center justify-center">
-              <span className="text-white text-[12px] font-black tracking-tight">U</span>
-            </div>
+            <Image src="/logo.png" alt="Umanity" width={32} height={32} className="rounded-full" />
             <span className="text-[16px] font-semibold tracking-[-0.02em]">Umanity</span>
           </div>
 
@@ -310,7 +307,7 @@ export default function Home() {
               <span>Anchor</span>
               <span>Supabase</span>
             </div>
-            <p className="text-[10px] text-[#d4d4d4] mt-2">&copy; 2025 Umanity</p>
+            <p className="text-[10px] text-[#d4d4d4] mt-2">&copy; 2026 Umanity</p>
           </div>
         </aside>
       </div>
@@ -434,9 +431,7 @@ function LandingPage({ onGuestMode }: { onGuestMode: () => void }) {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-2xl border-b border-black/[0.04]">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[10px] bg-[#1d1d1f] flex items-center justify-center">
-              <span className="text-white text-[12px] font-black tracking-tight">U</span>
-            </div>
+            <Image src="/logo.png" alt="Umanity" width={32} height={32} className="rounded-full" />
             <span className="text-[16px] font-bold tracking-[-0.03em]">Umanity</span>
           </div>
           <div className="flex items-center gap-5">
@@ -632,9 +627,7 @@ function LandingPage({ onGuestMode }: { onGuestMode: () => void }) {
         <footer className="border-t border-black/[0.04] py-8 px-6 bg-[#fafafa]">
           <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-6 h-6 rounded-lg bg-[#1d1d1f] flex items-center justify-center">
-                <span className="text-white text-[9px] font-black">U</span>
-              </div>
+              <Image src="/logo.png" alt="Umanity" width={24} height={24} className="rounded-full" />
               <span className="text-[13px] font-semibold text-[#1d1d1f]">Umanity</span>
               <span className="text-[11px] text-[#aeaeb2] ml-2">Crypto charity, resurrected.</span>
             </div>
@@ -805,10 +798,8 @@ function OnboardingScreen({ onComplete, referrer }: { onComplete: () => void; re
   return (
     <div className="min-h-[100dvh] page-bg flex flex-col">
       <header className="px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-[9px] bg-[#1d1d1f] flex items-center justify-center">
-            <span className="text-white text-[11px] font-black tracking-tight">U</span>
-          </div>
+        <div className="flex items-center gap-2">
+          <Image src="/logo.png" alt="Umanity" width={28} height={28} className="rounded-full" />
           <span className="text-[15px] font-semibold tracking-[-0.02em]">Umanity</span>
         </div>
         <button
