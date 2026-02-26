@@ -15,7 +15,7 @@ interface FeedItem {
   timestamp?: string
 }
 
-export function SmartFeed() {
+export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
   const { publicKey } = useWallet()
   const [feed, setFeed] = useState<FeedItem[]>([])
   const [loading, setLoading] = useState(true)
@@ -40,18 +40,25 @@ export function SmartFeed() {
   }
 
   const fetchFeed = useCallback(async () => {
-    if (!currentUsername) {
-      // Fallback: show global feed
+    if (guestMode || !currentUsername) {
+      // Guest mode or not logged in: show global feed
       try {
         const res = await fetch('/api/social/feed')
         const data = await res.json()
-        if (data.posts) {
+        if (data.posts && data.posts.length > 0) {
           setFeed(data.posts.map((p: Record<string, unknown>) => ({
             type: 'post' as const,
             id: p.id as string,
             data: p,
             timestamp: p.createdAt as string,
           })))
+        } else {
+          // Fallback: try smart feed global endpoint
+          const res2 = await fetch('/api/feed/smart?username=__global__')
+          const data2 = await res2.json()
+          if (data2.feed) {
+            setFeed(data2.feed)
+          }
         }
       } catch {
         // Empty
@@ -73,7 +80,7 @@ export function SmartFeed() {
     } finally {
       setLoading(false)
     }
-  }, [currentUsername, publicKey])
+  }, [currentUsername, publicKey, guestMode])
 
   useEffect(() => {
     fetchFeed()
@@ -125,6 +132,7 @@ export function SmartFeed() {
             key={item.id}
             post={item}
             currentUsername={currentUsername}
+            guestMode={guestMode}
           />
         )
     }
@@ -150,7 +158,7 @@ export function SmartFeed() {
         </div>
       )}
 
-      {!currentUsername && (
+      {!currentUsername && !guestMode && (
         <div className="card p-5 mb-4 flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
             <span className="text-sm">✦</span>

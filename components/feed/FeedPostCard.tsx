@@ -11,6 +11,7 @@ interface FeedPostCardProps {
     timestamp?: string
   }
   currentUsername: string | null
+  guestMode?: boolean
 }
 
 // Deep-extract text content from any Tapestry data shape
@@ -79,7 +80,7 @@ function extractProperties(data: Record<string, unknown>): Record<string, string
   return result
 }
 
-export function FeedPostCard({ post, currentUsername }: FeedPostCardProps) {
+export function FeedPostCard({ post, currentUsername, guestMode = false }: FeedPostCardProps) {
   const [liked, setLiked] = useState(false)
   const [likeCount, setLikeCount] = useState(
     (post.data.likeCount as number) || (post.data.likes as number) || 0
@@ -306,7 +307,8 @@ export function FeedPostCard({ post, currentUsername }: FeedPostCardProps) {
       <div className="flex items-center gap-5 pt-3 border-t border-black/[0.03]">
         <button
           onClick={handleLike}
-          disabled={!currentUsername}
+          disabled={!currentUsername || guestMode}
+          title={guestMode ? 'Connect wallet to like' : undefined}
           className={`flex items-center gap-1.5 text-xs font-medium transition-colors ${
             liked ? 'text-red-500' : 'text-gray-400 hover:text-red-500'
           } disabled:opacity-40`}
@@ -354,7 +356,7 @@ export function FeedPostCard({ post, currentUsername }: FeedPostCardProps) {
             </div>
           )}
 
-          {currentUsername && (
+          {currentUsername && !guestMode ? (
             <div className="flex gap-2">
               <input
                 type="text"
@@ -373,7 +375,9 @@ export function FeedPostCard({ post, currentUsername }: FeedPostCardProps) {
                 Post
               </button>
             </div>
-          )}
+          ) : guestMode ? (
+            <p className="text-[11px] text-gray-400 py-2">Connect a wallet to comment.</p>
+          ) : null}
         </div>
       )}
     </div>
