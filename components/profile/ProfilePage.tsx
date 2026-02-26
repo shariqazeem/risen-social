@@ -49,6 +49,8 @@ export function ProfilePage() {
   const [newBio, setNewBio] = useState('')
   const [savingBio, setSavingBio] = useState(false)
   const [showShareModal, setShowShareModal] = useState(false)
+  const [referralCount, setReferralCount] = useState(0)
+  const [referralCopied, setReferralCopied] = useState(false)
 
   useEffect(() => {
     if (publicKey) fetchProfile()
@@ -77,10 +79,11 @@ export function ProfilePage() {
 
         // Fetch social stats & NFTs in parallel
         const username = user.username
-        const [followersRes, followingRes, nftRes] = await Promise.allSettled([
+        const [followersRes, followingRes, nftRes, referralRes] = await Promise.allSettled([
           fetch(`/api/social/follow?type=followers&username=${username}`),
           fetch(`/api/social/follow?type=following&username=${username}`),
           fetch(`/api/nft/gallery?address=${publicKey.toBase58()}`),
+          fetch(`/api/social/referrals?username=${username}`),
         ])
 
         if (followersRes.status === 'fulfilled') {
@@ -94,6 +97,11 @@ export function ProfilePage() {
         if (nftRes.status === 'fulfilled') {
           const d = await nftRes.value.json()
           setNfts(d.nfts || [])
+        }
+        if (referralRes.status === 'fulfilled') {
+          const d = await referralRes.value.json()
+          const refs = d.referrals || d.profiles || d.children || []
+          setReferralCount(Array.isArray(refs) ? refs.length : 0)
         }
       }
     } catch {
@@ -239,6 +247,38 @@ export function ProfilePage() {
           onClose={() => setShowShareModal(false)}
         />
       )}
+
+      {/* Invite Link */}
+      <div className="card p-5 mb-4">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h3 className="font-semibold text-sm">Invite Friends</h3>
+            <p className="text-[10px] text-gray-400 mt-0.5">
+              {referralCount > 0 ? `${referralCount} people joined through you` : 'Share your link to earn referral points'}
+            </p>
+          </div>
+          {referralCount > 0 && (
+            <div className="bg-emerald-50 text-emerald-600 text-xs font-semibold px-2.5 py-1 rounded-full">
+              +{referralCount * 15} pts
+            </div>
+          )}
+        </div>
+        <div className="flex gap-2">
+          <div className="flex-1 bg-gray-50 rounded-xl px-3 py-2.5 text-xs text-gray-500 truncate font-mono">
+            umanity-solana.vercel.app?ref={profile.username}
+          </div>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(`https://umanity-solana.vercel.app?ref=${profile.username}`)
+              setReferralCopied(true)
+              setTimeout(() => setReferralCopied(false), 2000)
+            }}
+            className="btn-primary px-4 py-2.5 rounded-xl text-xs font-medium flex-shrink-0"
+          >
+            {referralCopied ? 'Copied!' : 'Copy'}
+          </button>
+        </div>
+      </div>
 
       {/* Impact Score */}
       <ImpactScore address={profile.address} username={profile.username} />
