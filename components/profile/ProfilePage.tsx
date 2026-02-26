@@ -150,8 +150,8 @@ export function ProfilePage() {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="mb-6 pt-2">
-        <h2 className="text-3xl font-bold tracking-tight mb-1">Profile</h2>
-        <p className="text-gray-400 text-sm">Your impact, permanently on-chain.</p>
+        <h2 className="text-2xl font-bold tracking-[-0.02em] mb-0.5">Profile</h2>
+        <p className="text-[#86868b] text-[13px]">Your impact, permanently on-chain.</p>
       </div>
 
       {/* Profile Header Card */}

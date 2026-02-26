@@ -74,8 +74,8 @@ export function GovernancePanel() {
             <span className="text-white text-sm">⬡</span>
           </div>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">The Council</h2>
-            <p className="text-gray-400 text-xs">Crypto governance died because nobody had real stakes. Here, votes control real escrowed funds.</p>
+            <h2 className="text-2xl font-bold tracking-[-0.02em]">Governance</h2>
+            <p className="text-[#86868b] text-[12px]">Community votes control real escrowed funds.</p>
           </div>
         </div>
       </div>

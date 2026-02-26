@@ -33,16 +33,17 @@ const config: Config = {
         },
       },
       boxShadow: {
-        'soft': '0 2px 8px rgba(0,0,0,0.04)',
-        'lifted': '0 4px 20px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.02)',
-        'elevated': '0 8px 40px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.03)',
-        'glow': '0 0 20px rgba(16,185,129,0.15)',
-        'glow-lg': '0 0 40px rgba(16,185,129,0.2)',
-        'whale': '0 8px 60px rgba(16,185,129,0.12), 0 0 0 1px rgba(16,185,129,0.08)',
+        'soft': '0 1px 4px rgba(0,0,0,0.03)',
+        'lifted': '0 2px 12px rgba(0,0,0,0.04)',
+        'elevated': '0 8px 32px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.02)',
+        'glow': '0 0 16px rgba(16,185,129,0.12)',
+        'glow-lg': '0 0 32px rgba(16,185,129,0.18)',
+        'whale': '0 4px 40px rgba(16,185,129,0.1), 0 0 0 1px rgba(16,185,129,0.06)',
       },
       transitionTimingFunction: {
         'spring': 'cubic-bezier(0.16, 1, 0.3, 1)',
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+        'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
       },
       animation: {
         'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -65,6 +66,9 @@ const config: Config = {
           '0%, 100%': { transform: 'scale(1)', filter: 'brightness(1)' },
           '50%': { transform: 'scale(1.08)', filter: 'brightness(1.15)' },
         },
+      },
+      borderRadius: {
+        'apple': '20px',
       },
     },
   },

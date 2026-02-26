@@ -20,6 +20,7 @@ export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
   const [feed, setFeed] = useState<FeedItem[]>([])
   const [loading, setLoading] = useState(true)
   const [currentUsername, setCurrentUsername] = useState<string | null>(null)
+  const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     if (publicKey) checkProfile()
@@ -41,7 +42,6 @@ export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
 
   const fetchFeed = useCallback(async () => {
     if (guestMode || !currentUsername) {
-      // Guest mode or not logged in: show global feed
       try {
         const res = await fetch('/api/social/feed')
         const data = await res.json()
@@ -53,7 +53,6 @@ export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
             timestamp: p.createdAt as string,
           })))
         } else {
-          // Fallback: try smart feed global endpoint
           const res2 = await fetch('/api/feed/smart?username=__global__')
           const data2 = await res2.json()
           if (data2.feed) {
@@ -64,6 +63,7 @@ export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
         // Empty
       } finally {
         setLoading(false)
+        setRefreshing(false)
       }
       return
     }
@@ -79,6 +79,7 @@ export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
       // Empty feed
     } finally {
       setLoading(false)
+      setRefreshing(false)
     }
   }, [currentUsername, publicKey, guestMode])
 
@@ -86,7 +87,11 @@ export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
     fetchFeed()
   }, [fetchFeed])
 
-  // Optimistically add a new post to the top of the feed
+  const handleRefresh = () => {
+    setRefreshing(true)
+    fetchFeed()
+  }
+
   const handlePostCreated = useCallback((content: string) => {
     if (!currentUsername) return
     const optimisticPost: FeedItem = {
@@ -139,50 +144,53 @@ export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="mb-6 pt-2">
-        <h2 className="text-3xl font-bold tracking-tight mb-1">Feed</h2>
-        <p className="text-gray-400 text-sm">Social giving, resurrected. Your network&apos;s impact, live.</p>
-        <span className="text-[10px] text-gray-300">Powered by Tapestry Protocol</span>
+    <div className="max-w-lg mx-auto">
+      {/* Feed Header */}
+      <div className="mb-5 pt-1">
+        <h2 className="text-2xl font-bold tracking-[-0.02em] mb-0.5">Feed</h2>
+        <p className="text-[#86868b] text-[13px]">Your network&apos;s impact, live.</p>
       </div>
 
+      {/* Composer */}
       {currentUsername && (
-        <div className="mb-4">
+        <div className="mb-3">
           <FeedComposer username={currentUsername} onPostCreated={handlePostCreated} />
         </div>
       )}
 
       {currentUsername && (
-        <div className="mb-4">
+        <div className="mb-3">
           <ImpactDare currentUsername={currentUsername} onDareCreated={fetchFeed} />
         </div>
       )}
 
       {!currentUsername && !guestMode && (
-        <div className="card p-5 mb-4 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-            <span className="text-sm">✦</span>
+        <div className="card p-4 mb-3 flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-[#f5f5f7] flex items-center justify-center flex-shrink-0">
+            <span className="text-xs">✦</span>
           </div>
           <div className="flex-1">
-            <p className="text-sm font-medium">Register to post</p>
-            <p className="text-xs text-gray-400">Connect your wallet and create a profile to start posting.</p>
+            <p className="text-[13px] font-medium">Register to post</p>
+            <p className="text-[11px] text-[#86868b]">Connect your wallet and create a profile.</p>
           </div>
         </div>
       )}
 
-      <div className="space-y-0">
+      {/* Feed Items */}
+      <div className="space-y-2.5">
         {loading ? (
-          <div className="space-y-3">
-            {[1, 2, 3].map((i) => <div key={i} className="skeleton h-36" />)}
+          <div className="space-y-2.5">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="skeleton h-32 rounded-[20px]" />
+            ))}
           </div>
         ) : feed.length === 0 ? (
           <div className="card p-10 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">✦</span>
+            <div className="w-12 h-12 rounded-full bg-[#f5f5f7] flex items-center justify-center mx-auto mb-3">
+              <span className="text-xl">✦</span>
             </div>
-            <p className="text-gray-900 font-semibold mb-1">Your feed is empty</p>
-            <p className="text-gray-400 text-sm">Follow impact makers and donate to see activity here.</p>
-            <p className="text-gray-300 text-xs mt-2">Head to the Explore tab to discover people and causes.</p>
+            <p className="text-[#1d1d1f] font-semibold text-[15px] mb-1">Your feed is empty</p>
+            <p className="text-[#86868b] text-[13px]">Follow people and donate to see activity.</p>
           </div>
         ) : (
           <div className="animate-stagger">
@@ -191,10 +199,20 @@ export function SmartFeed({ guestMode = false }: { guestMode?: boolean } = {}) {
         )}
       </div>
 
+      {/* Refresh */}
       {feed.length > 0 && (
-        <div className="mt-6 text-center">
-          <button onClick={fetchFeed} className="btn-ghost px-4 py-2 text-xs">
-            Refresh feed
+        <div className="mt-5 text-center">
+          <button
+            onClick={handleRefresh}
+            disabled={refreshing}
+            className="btn-ghost px-4 py-2 text-[12px] font-medium"
+          >
+            {refreshing ? (
+              <span className="flex items-center gap-1.5">
+                <span className="w-3 h-3 border-[1.5px] border-[#aeaeb2] border-t-[#1d1d1f] rounded-full animate-spin" />
+                Refreshing
+              </span>
+            ) : 'Refresh feed'}
           </button>
         </div>
       )}
@@ -227,20 +245,20 @@ function SuggestedFollowCard({ profile, currentUsername }: { profile: Record<str
   }
 
   return (
-    <div className="card p-5 mb-3 border-l-4 border-l-blue-400">
-      <p className="text-[10px] font-semibold uppercase tracking-wider text-blue-600 mb-3">Suggested for you</p>
+    <div className="card p-4 mb-2.5">
+      <p className="text-[9px] font-semibold uppercase tracking-[0.1em] text-blue-500 mb-2.5">Suggested for you</p>
       <div className="flex items-center gap-3">
         <GradientAvatar username={username} size="lg" />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium">@{username}</p>
-          {bio && <p className="text-xs text-gray-400 truncate">{bio}</p>}
+          <p className="text-[13px] font-medium">@{username}</p>
+          {bio && <p className="text-[11px] text-[#86868b] truncate">{bio}</p>}
         </div>
         <button
           onClick={handleFollow}
           disabled={followed || loading || !currentUsername}
-          className={`px-4 py-1.5 rounded-xl text-xs font-medium transition-all ${
+          className={`px-3.5 py-1.5 rounded-lg text-[11px] font-semibold transition-all duration-200 ${
             followed
-              ? 'bg-gray-100 text-gray-400'
+              ? 'bg-[#f5f5f7] text-[#86868b]'
               : 'btn-primary'
           }`}
         >
