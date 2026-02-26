@@ -149,7 +149,7 @@ export function NotificationBell({ address, username }: NotificationBellProps) {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-lg border border-black/[0.06] overflow-hidden z-50">
+        <div className="notif-dropdown absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-elevated border border-black/[0.06] overflow-hidden z-50">
           <div className="px-4 py-3 border-b border-black/[0.04]">
             <h3 className="text-[13px] font-semibold text-gray-900">Notifications</h3>
           </div>

@@ -76,22 +76,19 @@ export function Leaderboard() {
   ]
 
   return (
-    <div className="card p-6">
-      <div className="flex items-center justify-between mb-5">
-        <h3 className="font-bold">Leaderboard</h3>
-        <div className="flex gap-0.5 bg-gray-100 rounded-full p-0.5">
-          {tabs.map((t) => (
-            <button
-              key={t.key}
-              onClick={() => setTab(t.key)}
-              className={`px-3 py-1 rounded-full text-[11px] font-medium transition-all ${
-                tab === t.key ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-400 hover:text-gray-600'
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+    <div>
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
+        {tabs.map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
+              tab === t.key ? 'bg-[#1d1d1f] text-white' : 'bg-black/[0.04] text-[#86868b] hover:text-[#1d1d1f]'
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
       </div>
 
       {loading ? (
@@ -104,7 +101,7 @@ export function Leaderboard() {
         ) : (
           <div className="space-y-1">
             {socialLeaders.map((user, i) => (
-              <div key={user.username} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+              <div key={user.username} className="flex items-center gap-2 py-2 px-1.5 rounded-lg hover:bg-black/[0.02] transition-colors">
                 <div className="w-7 text-center">
                   {i < 3 ? (
                     <span className="text-sm">{medals[i]}</span>
@@ -130,7 +127,7 @@ export function Leaderboard() {
       ) : (
         <div className="space-y-1">
           {list.map((user: LeaderboardUser, i: number) => (
-            <div key={user.address} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+            <div key={user.address} className="flex items-center gap-2 py-2 px-1.5 rounded-lg hover:bg-black/[0.02] transition-colors">
               <div className="w-7 text-center">
                 {i < 3 ? (
                   <span className="text-sm">{medals[i]}</span>
@@ -157,6 +154,16 @@ export function Leaderboard() {
           ))}
         </div>
       )}
+    </div>
+  )
+}
+
+// Re-export as standalone card for non-sidebar usage
+export function LeaderboardCard() {
+  return (
+    <div className="card p-5">
+      <h3 className="font-bold text-[15px] mb-1">Leaderboard</h3>
+      <Leaderboard />
     </div>
   )
 }

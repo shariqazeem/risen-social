@@ -159,9 +159,8 @@ export default function Home() {
       {/* === MOBILE: Guest Banner === */}
       {guestMode && (
         <div className="lg:hidden bg-gradient-to-r from-amber-50/80 to-orange-50/80 border-b border-amber-200/30">
-          <div className="px-5 py-2 flex items-center justify-between">
-            <p className="text-[11px] text-amber-700/80">Guest mode — connect wallet to donate & post</p>
-            <WalletButton />
+          <div className="px-5 py-2">
+            <p className="text-[11px] text-amber-700/80">Browsing as guest — connect wallet from menu to donate & post</p>
           </div>
         </div>
       )}
@@ -250,10 +249,14 @@ export default function Home() {
                 <div className="flex-1 min-w-0">
                   <p className="text-[13px] font-semibold truncate">@{registeredUsername}</p>
                 </div>
-                <NotificationBell address={publicKey.toBase58()} username={registeredUsername} />
+                <div className="notif-up">
+                  <NotificationBell address={publicKey.toBase58()} username={registeredUsername} />
+                </div>
               </div>
             )}
-            <WalletButton />
+            <div className="wallet-up">
+              <WalletButton />
+            </div>
           </div>
         </aside>
 
@@ -265,9 +268,8 @@ export default function Home() {
           {/* Guest Banner Desktop */}
           {guestMode && (
             <div className="bg-gradient-to-r from-amber-50/80 to-orange-50/80 border-b border-amber-200/30">
-              <div className="px-5 py-2 flex items-center justify-between">
-                <p className="text-[11px] text-amber-700/80">Browsing as guest — connect wallet to donate & post</p>
-                <WalletButton />
+              <div className="px-5 py-2">
+                <p className="text-[11px] text-amber-700/80">Browsing as guest — connect wallet from sidebar to donate & post</p>
               </div>
             </div>
           )}
@@ -427,178 +429,224 @@ function GuestProfileView() {
 /* ===== LANDING PAGE ===== */
 function LandingPage({ onGuestMode }: { onGuestMode: () => void }) {
   return (
-    <div className="min-h-[100dvh] page-bg overflow-hidden">
-      {/* Minimal Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-2xl">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+    <div className="min-h-[100dvh] bg-white overflow-hidden">
+      {/* Floating Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-2xl border-b border-black/[0.04]">
+        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-[9px] bg-[#1d1d1f] flex items-center justify-center">
-              <span className="text-white text-[11px] font-black tracking-tight">U</span>
+            <div className="w-8 h-8 rounded-[10px] bg-[#1d1d1f] flex items-center justify-center">
+              <span className="text-white text-[12px] font-black tracking-tight">U</span>
             </div>
-            <span className="text-[15px] font-semibold tracking-[-0.02em]">Umanity</span>
+            <span className="text-[16px] font-bold tracking-[-0.03em]">Umanity</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             <button
               onClick={onGuestMode}
-              className="text-[13px] text-[#86868b] hover:text-[#1d1d1f] font-medium transition-colors"
+              className="hidden sm:block text-[13px] text-[#86868b] hover:text-[#1d1d1f] font-medium transition-colors"
             >
-              Explore
+              Explore App
             </button>
+            <a
+              href="https://github.com/shariqazeem/umanity-social"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:block text-[13px] text-[#86868b] hover:text-[#1d1d1f] font-medium transition-colors"
+            >
+              GitHub
+            </a>
             <WalletButton />
           </div>
         </div>
       </header>
 
-      <main className="relative">
-        {/* Hero — Apple keynote style */}
-        <div className="max-w-5xl mx-auto px-6 pt-32 md:pt-44 pb-16">
-          <div className="max-w-3xl animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border border-black/[0.04] text-[11px] font-medium text-[#86868b] mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              Solana Graveyard Hackathon
+      <main>
+        {/* ===== HERO — Full viewport, cinematic ===== */}
+        <section className="relative min-h-[100dvh] flex items-center">
+          {/* Subtle gradient bg */}
+          <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/30 via-white to-white" />
+
+          <div className="relative max-w-6xl mx-auto px-6 pt-20 pb-16 w-full">
+            <div className="max-w-3xl animate-fade-up">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/40 text-[11px] font-semibold text-emerald-700 mb-8">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Live on Solana Devnet
+              </div>
+
+              <h1 className="text-[clamp(2.8rem,8vw,6rem)] font-black tracking-[-0.04em] leading-[0.88] mb-8 text-[#1d1d1f]">
+                Crypto charity<br />
+                <span className="text-[#d4d4d4] line-through decoration-[#e5e5e5] decoration-[3px]">is dead.</span><br />
+                <span className="bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">Resurrected.</span>
+              </h1>
+
+              <p className="text-lg md:text-[22px] text-[#86868b] max-w-xl leading-[1.5] mb-10">
+                The social impact network on Solana. Where philanthropy IS the content, community escrow replaces rug pulls, and every donation tells a story.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-start gap-3 mb-6">
+                <WalletButton />
+                <button
+                  onClick={onGuestMode}
+                  className="btn-secondary px-7 py-3 text-[14px] rounded-xl font-medium"
+                >
+                  Explore as Guest
+                </button>
+              </div>
+
+              <div className="flex items-center gap-6 text-[12px] text-[#aeaeb2]">
+                {[
+                  { label: 'Non-custodial', icon: 'M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z' },
+                  { label: 'Instant', icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z' },
+                  { label: 'Transparent', icon: 'M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z' },
+                ].map((item) => (
+                  <span key={item.label} className="flex items-center gap-1.5">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
+                    </svg>
+                    {item.label}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <h1 className="text-[clamp(2.5rem,7vw,5.5rem)] font-bold tracking-[-0.04em] leading-[0.92] mb-6 text-[#1d1d1f]">
-              Crypto charity
-              <br />
-              <span className="text-[#d4d4d4] line-through decoration-[#e5e5e5] decoration-2">is dead.</span>
-              <br />
-              <span className="text-emerald-600">Resurrected.</span>
-            </h1>
+            {/* Stats floating on the right for desktop */}
+            <div className="hidden lg:block absolute right-6 top-1/2 -translate-y-1/2">
+              <div className="card-glass p-6 w-[200px] space-y-5">
+                <StatsBar />
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <p className="text-lg md:text-xl text-[#86868b] max-w-lg leading-relaxed mb-10 font-light">
-              Social proof replaces trust-me-bro. Community escrow replaces rug pulls. Giving becomes the content.
-            </p>
+        {/* Mobile Stats */}
+        <div className="lg:hidden border-y border-black/[0.04] bg-white/80">
+          <StatsBar />
+        </div>
 
-            <div className="flex flex-col sm:flex-row items-start gap-3">
+        {/* ===== THE GRAVEYARD ===== */}
+        <section className="py-20 md:py-28 bg-[#fafafa]">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <p className="text-[10px] font-bold text-[#aeaeb2] uppercase tracking-[0.2em] mb-3">The Graveyard</p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.03em] text-[#1d1d1f] mb-3">Three trends died.</h2>
+              <p className="text-[#86868b] text-base max-w-md mx-auto">Crypto charity failed because it prioritized tech over trust.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-stagger">
+              {[
+                { dead: 'GoFundMe Clones', why: 'No transparency. Off-chain. No community. Donate and hope for the best.', emoji: '🪦' },
+                { dead: 'Charity Tokens', why: 'Rug pulls everywhere. No accountability. Pure speculation disguised as giving.', emoji: '🪦' },
+                { dead: 'Donation Pages', why: 'Zero follow-up. No social proof. Donate once, forgotten forever.', emoji: '🪦' },
+              ].map((item) => (
+                <div key={item.dead} className="bg-white rounded-2xl p-6 border border-black/[0.05]">
+                  <span className="text-2xl mb-3 block">{item.emoji}</span>
+                  <h3 className="text-[15px] font-bold text-[#aeaeb2] line-through mb-2">{item.dead}</h3>
+                  <p className="text-[13px] text-[#86868b] leading-relaxed">{item.why}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== THE RESURRECTION ===== */}
+        <section className="py-20 md:py-28 bg-white">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-[0.2em] mb-3">The Resurrection</p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.03em] text-[#1d1d1f] mb-3">We brought it back.</h2>
+              <p className="text-[#86868b] text-base max-w-md mx-auto">Three innovations that fix what killed crypto charity.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-stagger">
+              {[
+                {
+                  num: '01', title: 'Social-First Feed', subtitle: 'Social Proof > Donation Pages',
+                  desc: 'Your feed shows what your network is giving. Donations become stories. 29 Tapestry Protocol integrations.',
+                  icon: '◎', tag: 'Tapestry Protocol',
+                },
+                {
+                  num: '02', title: 'DAO Governance', subtitle: 'Community Escrow > Trust Me Bro',
+                  desc: 'On-chain escrow vaults via Anchor. Community votes control fund releases. Real stakes.',
+                  icon: '⬡', tag: 'Anchor Escrow',
+                },
+                {
+                  num: '03', title: 'Impact Certificates', subtitle: 'On-Chain Proof > Email Receipts',
+                  desc: 'Tiered certificates — Bronze to Diamond. Every donation recorded on-chain, verifiable on Solscan.',
+                  icon: '◆', tag: 'On-Chain Proof',
+                },
+              ].map((f) => (
+                <div key={f.num} className="group bg-white rounded-2xl p-6 border border-black/[0.05] hover:border-emerald-200/60 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-lg text-emerald-600">
+                      {f.icon}
+                    </div>
+                    <span className="text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">{f.tag}</span>
+                  </div>
+                  <h3 className="text-[17px] font-bold mb-1 text-[#1d1d1f]">{f.title}</h3>
+                  <p className="text-[12px] font-semibold text-emerald-600 mb-2.5">{f.subtitle}</p>
+                  <p className="text-[13px] text-[#86868b] leading-relaxed">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== TECH DEPTH ===== */}
+        <section className="py-16 md:py-20 bg-[#1d1d1f] text-white">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-[-0.02em] mb-2">Built for real impact</h2>
+              <p className="text-white/50 text-sm">Not a toy. Not a demo. Real on-chain infrastructure.</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {[
+                { num: '856', label: 'Lines of Rust', sub: '2 Anchor programs' },
+                { num: '29', label: 'Tapestry Functions', sub: 'Full social stack' },
+                { num: '42', label: 'API Routes', sub: 'Next.js backend' },
+                { num: '6', label: 'Solana Blinks', sub: 'Donate from anywhere' },
+              ].map((s) => (
+                <div key={s.label} className="text-center py-4">
+                  <p className="text-3xl md:text-4xl font-black counter mb-1">{s.num}</p>
+                  <p className="text-[13px] font-medium text-white/80">{s.label}</p>
+                  <p className="text-[11px] text-white/40 mt-0.5">{s.sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ===== CTA ===== */}
+        <section className="py-20 md:py-28 bg-white">
+          <div className="max-w-2xl mx-auto px-6 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.03em] text-[#1d1d1f] mb-4">Ready to make an impact?</h2>
+            <p className="text-[#86868b] text-base mb-8 max-w-md mx-auto">Connect your wallet or explore as a guest. Every donation is on-chain, transparent, and community-governed.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <WalletButton />
-              <button
-                onClick={onGuestMode}
-                className="btn-secondary px-6 py-3 text-[14px] rounded-xl"
-              >
+              <button onClick={onGuestMode} className="btn-secondary px-7 py-3 text-[14px] rounded-xl font-medium">
                 Explore as Guest
               </button>
             </div>
-            <div className="flex items-center gap-5 text-[11px] text-[#aeaeb2] mt-6">
-              <span className="flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                </svg>
-                Non-custodial
-              </span>
-              <span className="flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                </svg>
-                Instant
-              </span>
-              <span className="flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                Transparent
-              </span>
-            </div>
           </div>
-        </div>
-
-        {/* Stats */}
-        <StatsBar />
-
-        {/* What Died */}
-        <div className="max-w-5xl mx-auto px-6 pt-16 pb-6">
-          <p className="text-[11px] font-semibold text-[#aeaeb2] uppercase tracking-[0.15em] mb-6 text-center">What died</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 animate-stagger">
-            {[
-              { dead: 'GoFundMe Clones', why: 'No transparency. Off-chain. No community.' },
-              { dead: 'Charity Tokens', why: 'Rug pulls. No accountability. Speculation disguised as giving.' },
-              { dead: 'Donation Pages', why: 'Zero follow-up. No social proof. Forgotten forever.' },
-            ].map((item) => (
-              <div key={item.dead} className="card p-5 opacity-80">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[#d4d4d4] text-sm">&#x1FAA6;</span>
-                  <h3 className="text-[13px] font-semibold text-[#aeaeb2] line-through">{item.dead}</h3>
-                </div>
-                <p className="text-[12px] text-[#86868b] leading-relaxed">{item.why}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Arrow */}
-        <div className="flex justify-center py-4">
-          <div className="flex flex-col items-center gap-1 text-emerald-500">
-            <svg className="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Resurrected */}
-        <div className="max-w-5xl mx-auto px-6 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 animate-stagger">
-            {[
-              {
-                num: '01',
-                title: 'Social-First Feed',
-                subtitle: 'Social Proof > Donation Pages',
-                desc: 'Your feed shows what your network is giving. Donations become stories. Built on Tapestry Protocol.',
-                tag: 'Tapestry',
-                highlight: true,
-              },
-              {
-                num: '02',
-                title: 'DAO Governance',
-                subtitle: 'Community Escrow > Trust Me Bro',
-                desc: 'On-chain escrow vaults. Community votes control fund releases. Real stakes.',
-                tag: 'Anchor',
-                highlight: false,
-              },
-              {
-                num: '03',
-                title: 'Impact Certificates',
-                subtitle: 'On-Chain Proof > Email Receipts',
-                desc: 'Tiered certificates from Bronze to Diamond. Permanent, verifiable on Solana.',
-                tag: 'Impact',
-                highlight: false,
-              },
-            ].map((f) => (
-              <div key={f.num} className="card-interactive p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-mono text-[#aeaeb2]">{f.num}</span>
-                  <span className={`text-[9px] font-medium px-2 py-0.5 rounded-full ${
-                    f.highlight
-                      ? 'text-emerald-600 bg-emerald-50'
-                      : 'text-[#86868b] bg-black/[0.03]'
-                  }`}>{f.tag}</span>
-                </div>
-                <h3 className="text-base font-semibold mb-0.5 text-[#1d1d1f]">{f.title}</h3>
-                <p className="text-[11px] font-medium text-emerald-600 mb-2">{f.subtitle}</p>
-                <p className="text-[12px] text-[#86868b] leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-[10px] text-[#aeaeb2] mt-5">Social layer powered by Tapestry Protocol</p>
-        </div>
+        </section>
 
         {/* Footer */}
-        <div className="border-t border-black/[0.04] py-10 px-6">
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-6 text-[12px] text-[#aeaeb2]">
+        <footer className="border-t border-black/[0.04] py-8 px-6 bg-[#fafafa]">
+          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-6 h-6 rounded-lg bg-[#1d1d1f] flex items-center justify-center">
+                <span className="text-white text-[9px] font-black">U</span>
+              </div>
+              <span className="text-[13px] font-semibold text-[#1d1d1f]">Umanity</span>
+              <span className="text-[11px] text-[#aeaeb2] ml-2">Crypto charity, resurrected.</span>
+            </div>
+            <div className="flex items-center gap-5 text-[11px] text-[#aeaeb2]">
               <span>Solana</span>
               <span>Tapestry</span>
               <span>Anchor</span>
               <span>Supabase</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <button onClick={onGuestMode} className="btn-secondary px-4 py-2 text-[13px] rounded-xl">
-                Explore
-              </button>
-              <WalletButton />
+              <span>&copy; 2025</span>
             </div>
           </div>
-        </div>
+        </footer>
       </main>
     </div>
   )

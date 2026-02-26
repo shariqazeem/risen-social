@@ -634,3 +634,39 @@ body {
 .content-reveal {
   animation: contentReveal 0.4s var(--ease-spring) both;
 }
+
+/* Wallet adapter dropdown fix — open upward when in sidebar */
+.wallet-up .wallet-adapter-dropdown-list {
+  top: auto !important;
+  bottom: 100% !important;
+  margin-bottom: 8px !important;
+  margin-top: 0 !important;
+}
+
+/* Notification dropdown fix — open upward when in sidebar */
+.notif-up .notif-dropdown {
+  top: auto !important;
+  bottom: 100% !important;
+  margin-bottom: 8px !important;
+}
+
+/* Wallet adapter style overrides */
+.wallet-adapter-button {
+  font-family: 'Inter', -apple-system, sans-serif !important;
+}
+
+.wallet-adapter-dropdown-list {
+  border-radius: 16px !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08) !important;
+  overflow: hidden !important;
+}
+
+.wallet-adapter-dropdown-list-item {
+  font-size: 13px !important;
+  padding: 10px 16px !important;
+}
+
+.wallet-adapter-dropdown-list-item:hover {
+  background: rgba(0,0,0,0.03) !important;
+}
