@@ -552,7 +552,7 @@ export function UmanityAgent({ poolStats, userStats }: UmanityAgentProps) {
       {/* Floating Action Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-24 md:bottom-8 right-5 z-40 w-14 h-14 rounded-full shadow-2xl shadow-black/25 flex items-center justify-center transition-all duration-300 ${
+        className={`fixed bottom-[100px] lg:bottom-6 right-5 lg:right-6 z-[60] w-14 h-14 rounded-full shadow-2xl shadow-black/25 flex items-center justify-center transition-all duration-300 ${
           isOpen
             ? 'bg-gray-200 text-gray-600 rotate-45 scale-95'
             : 'bg-[#111] text-white hover:scale-110 hover:shadow-black/40'
@@ -571,12 +571,12 @@ export function UmanityAgent({ poolStats, userStats }: UmanityAgentProps) {
 
       {/* Pulse ring when closed */}
       {!isOpen && (
-        <div className="fixed bottom-24 md:bottom-8 right-5 z-30 w-14 h-14 rounded-full bg-[#111]/20 animate-ping pointer-events-none" />
+        <div className="fixed bottom-[100px] lg:bottom-6 right-5 lg:right-6 z-[55] w-14 h-14 rounded-full bg-[#111]/20 animate-ping pointer-events-none" />
       )}
 
       {/* Chat Panel */}
       {isOpen && (
-        <div className="fixed bottom-24 md:bottom-24 right-5 z-50 w-[calc(100vw-2.5rem)] max-w-[400px] animate-in"
+        <div className="fixed bottom-[170px] lg:bottom-[88px] right-5 lg:right-6 z-[60] w-[calc(100vw-2.5rem)] max-w-[400px] animate-in"
           style={{ maxHeight: 'calc(100vh - 10rem)' }}
         >
           <div className="bg-white rounded-3xl shadow-2xl shadow-black/15 border border-black/[0.04] overflow-hidden flex flex-col"

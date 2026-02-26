@@ -319,7 +319,7 @@ export default function Home() {
         </div>
       </main>
 
-      {!guestMode && <UmanityAgent />}
+      <UmanityAgent />
     </div>
   )
 }
