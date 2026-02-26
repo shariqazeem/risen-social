@@ -271,13 +271,14 @@ export function DonationPools() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => {
-                      const url = `${window.location.origin}/api/actions/donate/${pool.id}`
-                      navigator.clipboard.writeText(url)
+                      const actionUrl = `${window.location.origin}/api/actions/donate/${pool.id}`
+                      const blinkUrl = `https://dial.to/?action=solana-action:${encodeURIComponent(actionUrl)}`
+                      navigator.clipboard.writeText(blinkUrl)
                       const el = document.getElementById(`blink-${pool.id}`)
                       if (el) { el.textContent = 'Copied!'; setTimeout(() => { el.textContent = 'Blink' }, 1500) }
                     }}
                     className="py-2 px-3 text-[10px] font-medium rounded-lg border border-black/[0.06] text-[#86868b] hover:text-[#1d1d1f] hover:border-black/[0.12] transition-all"
-                    title="Copy Solana Blink URL"
+                    title="Copy shareable Blink link (dial.to)"
                   >
                     <span id={`blink-${pool.id}`}>Blink</span>
                   </button>

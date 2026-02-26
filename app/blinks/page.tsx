@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const POOLS = [
   { id: 'palestine-red-crescent', name: 'Palestine Red Crescent Society', category: 'Healthcare', type: 'Verified Charity Trust' },
@@ -17,7 +18,8 @@ export default function BlinksPage() {
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
 
   const copyUrl = (poolId: string) => {
-    const url = `${baseUrl}/api/actions/donate/${poolId}`
+    const actionUrl = `${baseUrl}/api/actions/donate/${poolId}`
+    const url = `https://dial.to/?action=solana-action:${encodeURIComponent(actionUrl)}`
     navigator.clipboard.writeText(url)
     setCopiedId(poolId)
     setTimeout(() => setCopiedId(null), 2000)
@@ -27,11 +29,8 @@ export default function BlinksPage() {
     <div className="min-h-screen page-bg">
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-2xl border-b border-black/[0.03]">
         <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#111] flex items-center justify-center">
-              <span className="text-white text-xs font-black">U</span>
-            </div>
-            <span className="text-[15px] font-semibold tracking-tight">Umanity</span>
+          <Link href="/">
+            <Image src="/logo.png" alt="Umanity" width={32} height={32} className="rounded-full" />
           </Link>
           <div className="flex items-center gap-1.5 text-[11px] text-gray-400">
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
@@ -53,7 +52,8 @@ export default function BlinksPage() {
 
         <div className="space-y-3 animate-stagger">
           {POOLS.map((pool) => {
-            const blinkUrl = `${baseUrl}/api/actions/donate/${pool.id}`
+            const actionUrl = `${baseUrl}/api/actions/donate/${pool.id}`
+            const blinkUrl = `https://dial.to/?action=solana-action:${encodeURIComponent(actionUrl)}`
             const isCopied = copiedId === pool.id
 
             return (
@@ -76,6 +76,14 @@ export default function BlinksPage() {
                       <code className="flex-1 text-[11px] bg-gray-50 border border-black/[0.04] rounded-lg px-3 py-2 text-gray-500 truncate font-mono">
                         {blinkUrl}
                       </code>
+                      <a
+                        href={blinkUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-2 rounded-lg text-xs font-medium border border-black/[0.06] text-[#86868b] hover:text-[#1d1d1f] hover:border-black/[0.12] transition-all"
+                      >
+                        Try
+                      </a>
                       <button
                         onClick={() => copyUrl(pool.id)}
                         className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${
