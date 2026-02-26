@@ -139,7 +139,7 @@ export async function getPost(contentId: string) {
 }
 
 export async function getAllPosts() {
-  const data = await tapestryFetch('/contents/')
+  const data = await tapestryFetch('/contents/', { params: { pageSize: '50' } })
   // API returns { contents: [...], page, pageSize, totalCount }
   return data.contents || []
 }
