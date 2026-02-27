@@ -9,28 +9,33 @@
 
 ---
 
-## The Graveyard
+## The Graveyard — 6 Dead Crypto Trends, Resurrected
 
-Three crypto charity trends died. Here's why:
+The hackathon theme is resurrection. We didn't resurrect one trend — we brought back six.
 
-| What Died | Why It Failed |
-|-----------|--------------|
-| **GoFundMe Clones** | No transparency. Off-chain. No community. Donate and hope. |
-| **Charity Tokens** | Rug pulls. No accountability. Speculation disguised as giving. |
-| **Donation Pages** | Zero follow-up. No social proof. Donate once, forgotten forever. |
+### 1. Social-Fi → Social Impact Feed
+**What died:** Social-Fi collapsed into airdrop farming and engagement bait with zero real value.
+**How we resurrected it:** Every donation auto-posts to a Tapestry-powered social feed. Your feed shows what your network is giving — likes, comments, follows, Impact Dares. Built on **29 Tapestry Protocol integrations** covering profiles, follows, feed, likes, comments, search, dares, referrals, leaderboards, and social graph. Social proof drives real-world charity.
 
-## The Resurrection
+### 2. Charity Tokens → On-Chain Escrow Vaults
+**What died:** Charity tokens were rug pulls disguised as generosity — no accountability, pure speculation.
+**How we resurrected it:** Every SOL donated goes into Anchor-managed escrow vault PDAs on-chain. No personal wallets, no rug pulls. Funds are locked until the community votes to release them through milestone-based governance. **2 Anchor programs, 856 lines of Rust.**
 
-Umanity brings crypto charity back from the dead with three innovations:
+### 3. DAOs → Community Governance
+**What died:** DAO governance was theater — votes meant nothing, no real stakes, no consequences.
+**How we resurrected it:** Your donations earn voting power (1 SOL = 1,000 points). When a charity pool hits a fundraising milestone, a fund-release proposal is auto-created. The community votes on whether escrowed funds should be released. If the community says no, the money stays locked in the vault. Votes control real money.
 
-### 1. Social-First Feed — "Social Proof > Donation Pages"
-Your feed shows what your network is giving. Donations become stories. Follows drive accountability. Every donation auto-posts to the social feed. Built on **Tapestry Protocol** with 29 social API integrations — profiles, follows, feed, likes, comments, search, Impact Dares, referrals, leaderboards, and social graph.
+### 4. NFTs → Impact Certificates
+**What died:** NFTs became random JPEGs with no utility — pure speculation, zero real-world value.
+**How we resurrected it:** Tiered impact certificates (Bronze → Silver → Gold → Diamond) tied to actual donations. Every donation is recorded on-chain via `DonationRecord` accounts — permanent, verifiable on Solscan. Certificates aggregate your giving history into a portable impact identity. Proof of generosity, not speculation.
 
-### 2. DAO Governance — "Community Escrow > Trust Me Bro"
-Donations go to on-chain escrow vaults via Anchor programs. Community members earn voting power through donations (1 SOL = 1,000 points). Governance proposals signal when escrowed funds should be released — community votes are tallied off-chain, and approved milestones are executed by the on-chain authority via `release_milestone_funds`. Milestone-based releases ensure accountability: funds are locked until the community says go.
+### 5. Loyalty Programs → Reward Points & Streaks
+**What died:** Crypto loyalty programs offered worthless tokens nobody wanted — no engagement, no retention.
+**How we resurrected it:** Every donation earns reward points, builds donation streaks, and unlocks impact tiers. Points translate directly into governance voting power — giving you real influence over escrowed funds. Your generosity compounds into on-chain reputation.
 
-### 3. Impact Certificates — "Verifiable Proof > Email Receipts"
-Tiered certificates (Bronze → Silver → Gold → Diamond) tied to your wallet. Every donation is recorded on-chain via `DonationRecord` accounts — permanent, verifiable on Solscan. Certificates aggregate your giving history into a portable impact identity. Soulbound on-chain NFT minting planned as next milestone.
+### 6. Blinks → Donation Blinks
+**What died:** Solana Blinks launched with hype but had no real utility — no one used them for anything meaningful.
+**How we resurrected it:** 6 live Solana Blinks — one per charity pool. Donate directly from any X feed or web page via Solana Actions API v2.1.3. One-click charity from anywhere on the internet.
 
 ---
 
@@ -92,10 +97,13 @@ Blinks Flow:
 ## Bounty Tracks
 
 ### Main Track — "Graveyard"
-Umanity resurrects crypto charity by solving the three problems that killed it:
-- **Transparency**: On-chain escrow vaults, community governance, Solscan-verifiable transactions
-- **Accountability**: Milestone-based fund releases controlled by community votes
-- **Social Proof**: Tapestry-powered social feed where giving IS the content
+Umanity resurrects 6 dead crypto trends into one social impact network:
+- **Social-Fi** → Social impact feed powered by Tapestry Protocol (29 integrations)
+- **Charity Tokens** → On-chain escrow vaults via Anchor programs (no rug pulls)
+- **DAOs** → Community governance where votes control real escrowed funds
+- **NFTs** → Impact certificates tied to verifiable on-chain donations
+- **Loyalty Programs** → Reward points, streaks, and tiers that translate to voting power
+- **Blinks** → 6 live donation Blinks via Solana Actions API
 
 ### Tapestry Social Track
 Deep integration with Tapestry Protocol across the entire app:
@@ -110,6 +118,14 @@ Deep integration with Tapestry Protocol across the entire app:
 - Content search and discovery
 - Mutual follows detection
 - Activity feed powered by social graph
+
+### DAOs Track
+Community governance with real financial stakes:
+- Donations earn voting power (1 SOL = 1,000 points)
+- Milestone-based fund-release proposals auto-created when pools hit targets
+- Community votes determine whether escrowed funds are released
+- On-chain escrow vaults via Anchor `release_milestone_funds` instruction
+- Governance proposals with vote counts, status tracking, and execution
 
 ---
 

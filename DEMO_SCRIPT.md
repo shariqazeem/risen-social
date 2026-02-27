@@ -1,161 +1,117 @@
-# Umanity — Demo Video Script (Under 3 Minutes)
-
-## Before You Record
-
-- Fresh browser, full screen Chrome on MacBook
-- Phantom wallet on **Devnet** with SOL, NOT connected yet
-- iPhone 16 Pro as face cam (bottom-right picture-in-picture)
-- Script on phone to glance at (keep it natural, don't read word-for-word)
-- If you already have an account, disconnect wallet first so you can show the full flow
+# Umanity — Demo Video Script
 
 ---
 
-## 1. LANDING PAGE [0:00 - 0:25]
+## 1. LANDING PAGE [0:00 - 0:30]
 
-> You're on the landing page. Camera on your face. Speak naturally.
+> On landing page. Look at camera.
 
-"Hey, so this is Umanity — a social impact network we built on Solana for the Graveyard Hackathon."
+"Assalam o Alaikum everyone, my name is Shariq and I built Umanity for the Solana Graveyard Hackathon. Now the whole idea behind this hackathon is to resurrect dead crypto trends, right? And when I looked at what died in crypto — Social-Fi, charity tokens, DAOs, NFTs, loyalty programs, Blinks — I realized all of these failed for the same reason. They had no real purpose. So I brought all six of them back to life inside one app — a social impact network where people actually donate, govern funds together, and prove their impact on-chain."
 
-> Scroll down slowly past the hero to the 6 resurrection cards
+> Scroll down slowly to show the 6 resurrection cards and the tech stats section
 
-"The idea is simple. Six crypto trends died — Social-Fi, charity tokens, DAOs, NFTs, loyalty programs, and Blinks. We resurrected all six into one working app."
+"You can see right here — each dead trend and exactly how we resurrected it. And this isn't a prototype — we're talking two Anchor programs, eight hundred fifty-six lines of Rust, twenty-nine Tapestry integrations, forty-two API routes, and six live Solana Blinks. So let me walk you through the whole thing."
 
-> Keep scrolling to the dark tech stats section (856 lines Rust, 29 Tapestry, etc.)
-
-"Two Anchor programs, eight fifty-six lines of Rust, twenty-nine Tapestry integrations, forty-two API routes, six live Blinks. Let me show you how it all works."
-
-> Scroll back up to the top. Click "Connect Wallet"
+> Scroll back up. Click Connect Wallet.
 
 ---
 
-## 2. ONBOARDING [0:25 - 0:50]
+## 2. ONBOARDING [0:30 - 0:55]
 
-> Phantom popup appears. Approve connection. Onboarding screen loads.
+> Phantom popup appears. Approve. Onboarding loads.
 
-"So when you connect your wallet, you get this onboarding flow."
+"So the moment you connect your wallet, you land on this clean onboarding flow. First thing it asks you is to create your identity — your username and display name."
 
-> Welcome screen shows. Click "Get Started"
+> Type username and display name. Click Continue.
 
-"First step — pick your username and display name."
+"Then it suggests real people for you to follow. These aren't fake accounts — these are actual Tapestry Protocol profiles living on the social graph. You pick who you want to follow and their donations will show up in your feed."
 
-> Type a username and display name. Click Continue.
+> Select a few. Click Continue.
 
-"Step two — it suggests people to follow. These are real Tapestry profiles on our social graph."
+"Last step, you write a quick bio, and that's it — your on-chain social identity is created on Tapestry and you're inside the app."
 
-> Select a few people. Click Continue.
-
-"And step three — add your bio. This all gets saved to Tapestry Protocol as your on-chain social identity."
-
-> Type a quick bio. Click "Complete Setup" or finish onboarding.
-
-"And we're in."
+> Finish onboarding. Dashboard loads.
 
 ---
 
-## 3. THE FEED [0:50 - 1:15]
+## 3. THE FEED [0:55 - 1:20]
 
-> Dashboard loads. Feed tab is active. 3-column layout visible on desktop.
+> 3-column desktop layout is visible. Feed tab active.
 
-"So this is the main feed. It works like X or Instagram but every post here is tied to real donations."
+"And this is the main dashboard. If you notice, it looks and feels like X — three column layout, feed in the center, navigation on the left, and leaderboard with recent activity on the right. But the difference is, every single post you see here is connected to a real donation on the Solana blockchain."
 
-> Scroll the feed slowly. Point out donation posts.
+> Scroll the feed. Point at posts.
 
-"You can see people donating to different causes, the amounts, links to verify on Solscan. Everything is public and on-chain."
+"People are donating to causes, and those donations automatically post to the feed. You can like them, you can comment on them, you can follow the donors. This is how we resurrected Social-Fi — we made giving the content instead of farming and airdrops."
 
-> Like a post. Open comments on one.
-
-"Likes, comments, all powered by Tapestry Protocol. On the right side you have the leaderboard showing top donors, and recent activity."
-
-> Point to the right sidebar — leaderboard, activity feed
-
-"On the left — our navigation. Feed, Explore, Donate, Govern, Profile."
+> Like a post.
 
 ---
 
-## 4. DONATE [1:15 - 1:45]
+## 4. DONATE [1:20 - 1:55]
 
-> Click "Donate" in the left sidebar
+> Click Donate tab.
 
-"Let me make a real donation right now."
+"Now let me show you the core of the app — the donation system. We have six active charity pools right now, and the important thing to understand is that none of this money goes to anyone's personal wallet."
 
-> Show the 6 charity pools. Point out the escrow info banner.
+> Show the escrow info banner.
 
-"Six charity pools — Palestine Red Crescent, Mercy Corps, Edhi Foundation, and more. All funds go to on-chain escrow vaults, not personal wallets."
+"Every single SOL that gets donated goes into an Anchor escrow vault on-chain. The funds sit there, locked, until the community votes to release them through governance. That's how we killed the rug pull problem — you literally cannot run away with the money."
 
-> Click Donate on a pool. Enter amount or use preset. Phantom popup shows. Sign it.
+> Click Donate on a pool. Phantom popup. Sign it.
 
-"Real SOL, real transaction. Let me sign this."
+"Let me make a real donation right now so you can see it happen live. I'm signing this with my Phantom wallet on Devnet and this is going straight to the blockchain."
 
-> Transaction confirms. Show success / Solscan link.
+> Transaction confirms.
 
-"Done. Verified on the blockchain. And if I go back to the feed..."
+"Done. And watch this — if I go back to my feed..."
 
-> Click Feed tab
+> Click Feed tab. Show the auto-posted donation.
 
-"My donation auto-posted to the feed. That's the Social-Fi resurrection — giving IS the content."
-
----
-
-## 5. EXPLORE [1:45 - 1:55]
-
-> Click "Explore" in sidebar
-
-"Explore tab — search for users, discover trending causes, suggested follows. Full social graph."
-
-> Quick scroll, show search bar and suggestions. Don't spend too long here.
+"My donation just automatically posted to the social feed for everyone to see. That's social proof driving real-world charity."
 
 ---
 
-## 6. GOVERNANCE [1:55 - 2:20]
+## 5. GOVERNANCE [1:55 - 2:25]
 
-> Click "Govern" in sidebar
+> Click Govern tab.
 
-"Now this is where it gets interesting. DAOs died because votes never controlled real money. Here, they do."
+"Now here's the part I'm most proud of. DAOs completely died in crypto because voting never actually did anything — it was all governance theater. On Umanity, your vote controls real money sitting in a Solana vault."
 
-> Show the governance panel. Your voting power is visible.
+> Show voting power and proposals.
 
-"Every SOL you donate gives you a thousand voting points. You can see my voting power right here."
+"Every SOL you donate earns you a thousand voting points, and you can see my voting power right here. When a charity pool hits a fundraising milestone, a fund-release proposal is automatically created, and the community has to vote on whether those escrowed funds should be released to the charity."
 
-> Click on a proposal. Show the vote details.
+> Click on a proposal to show details.
 
-"When a charity pool hits a milestone, a fund-release proposal is auto-created. The community votes on whether to release the escrowed SOL. Your vote literally controls real money in a Solana vault."
-
-> Cast a vote or show an existing one
+"So this isn't some symbolic governance — if the community says no, the money stays locked in the vault. Your vote has real financial consequences and that is what makes this different from every other DAO that came before it."
 
 ---
 
-## 7. PROFILE [2:20 - 2:40]
+## 6. PROFILE & CLOSE [2:25 - 2:55]
 
-> Click "Profile" in sidebar
+> Click Profile tab.
 
-"And your profile tracks everything. Impact score, donation streak, how many people you've referred."
+"And finally, every user gets a full impact profile. You can see your impact score, your donation streak, how many causes you've supported, your followers and who you're following, and your referral link to invite others."
 
-> Scroll down to show impact certificates
+> Scroll to show impact certificates.
 
-"These are your impact certificates — resurrected NFTs. Bronze, Silver, Gold, Diamond. Each one is tied to a real donation, not just a JPEG."
+"And these right here are your impact certificates — this is how we resurrected NFTs. Instead of random JPEGs, these are soulbound certificates tied to actual donations. Bronze, Silver, Gold, Diamond — each tier represents real generosity, not speculation."
 
-> Show followers/following counts, referral section
+> Look at camera for the close.
 
-"Points, followers, your full social identity — all portable, all on-chain."
+"So that's Umanity. Six dead crypto trends — Social-Fi, charity tokens, DAOs, NFTs, loyalty programs, and Blinks — all resurrected into one social impact network built entirely on Solana with Tapestry Protocol, Anchor programs, and real on-chain escrow. We didn't just build a donation page — we built the app that crypto charity was always supposed to be."
 
----
+> Pause. Confident.
 
-## 8. CLOSE [2:40 - 2:55]
-
-> Look at camera. Feed or landing page visible behind you.
-
-"So that's Umanity. We took six dead crypto trends — Social-Fi, charity tokens, DAOs, NFTs, loyalty programs, and Blinks — and resurrected all of them into one social impact network on Solana."
-
-> Slight pause. Confident.
-
-"Umanity. Crypto charity, resurrected."
+"Umanity. Crypto charity, resurrected. JazakAllah Khair."
 
 ---
 
 ## Tips
 
-- **Don't memorize** — glance at the script, speak in your own words
-- **Keep moving** — if something loads slow, just talk through it
-- **Be yourself** — you built this, show that energy
-- **Target 2:50** — gives you breathing room under 3:00
-- **One take is fine** — you can trim pauses in editing
+- **Pre-load every tab** before recording so nothing needs to load on camera
+- **Phantom unlocked** with devnet SOL ready
+- **Speak naturally** — this script is a guide, use your own energy and words
+- **Don't restart for small mistakes** — just keep going, trim in editing
+- **Target: 2:50** — leaves breathing room under 3:00
