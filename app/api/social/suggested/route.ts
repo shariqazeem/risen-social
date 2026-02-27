@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSuggestedProfiles } from '@/lib/tapestry'
+import { getSuggestedProfiles, getTapestryLeaderboard } from '@/lib/tapestry'
 
 export async function GET(request: NextRequest) {
   try {
@@ -7,7 +7,30 @@ export async function GET(request: NextRequest) {
     if (!username) {
       return NextResponse.json({ profiles: [] })
     }
-    const rawProfiles = await getSuggestedProfiles(username)
+
+    // Try suggested profiles first
+    let rawProfiles: any[] = []
+    try {
+      rawProfiles = await getSuggestedProfiles(username)
+    } catch {
+      // User may not exist yet on Tapestry — that's fine
+    }
+
+    // If no suggestions (new user), fallback to leaderboard profiles
+    if (!rawProfiles || rawProfiles.length === 0) {
+      try {
+        const leaderboard = await getTapestryLeaderboard('umanity')
+        const entries = leaderboard?.entries || leaderboard?.profiles || leaderboard || []
+        rawProfiles = (Array.isArray(entries) ? entries : [])
+          .filter((e: any) => {
+            const uname = e.username || e.profile?.username || ''
+            return uname && uname !== username
+          })
+          .slice(0, 10)
+      } catch {
+        // fallback failed too
+      }
+    }
 
     // Normalize Tapestry profile data
     const profiles = (rawProfiles || [])
@@ -15,7 +38,7 @@ export async function GET(request: NextRequest) {
         username: p.username || p.id || p.profile?.username || '',
         bio: p.bio || p.profile?.bio || '',
       }))
-      .filter((p: any) => p.username)
+      .filter((p: any) => p.username && p.username !== username)
 
     return NextResponse.json({ profiles })
   } catch (error) {
